@@ -12,7 +12,11 @@ namespace accounting_api.Models.Setup.Tax
 
         [Key] 
         public int id { get; set; } = 0;
+
+        [Required]
         public string? code { get; set; }
+
+        [Required]
         public string? name { get; set; }
     }  
 }

@@ -12,7 +12,8 @@ namespace accounting_api.Models.Setup.Tax
         public string IP_ADDRESS { get; set; } = "";
         public DateTime AT_DATE { get; set; } = DateTime.Now.Date;
         public int AT_USER_ID { get; set; } = 0;
-         
+        public int AT_USER_IDs { get; set; } = 0;
+
         public void CopyFromBase(Setup_Inputvat_model baseInstance)
         {
             effectivity_date = baseInstance.effectivity_date;

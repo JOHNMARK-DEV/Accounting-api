@@ -7,9 +7,17 @@ namespace accounting_api.Models.Setup.User
         [Key]
         public int id { get; set; }
         public int profile_id { get; set; }
+
+        [Required]
         public String? username { get; set; }
+
+        [Required]
         public String? password { get; set; }
+
+        [Required]
         public String? email { get; set; }
+
+        [Required]
         public String? name { get; set; }  
         public int position_id { get; set; } 
         public int department_id { get; set; }

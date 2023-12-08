@@ -12,7 +12,11 @@ namespace accounting_api.Models.Setup.Tax
 
         [Key]  
         public int id { get; set; } = 0;
+
+        [Required]
         public DateTime effectivity_date { get; set; } = DateTime.Now.Date;
+
+        [Required]
         public decimal? rate { get; set; } = 0;
     } 
 }
