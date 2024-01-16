@@ -17,7 +17,8 @@ namespace accounting_api.Models.Setup.Tax
         public void CopyFromBase(Setup_Finaltax_model baseInstance)
         {
             code = baseInstance.code;
-            name = baseInstance.name;
+            name = baseInstance.name; 
+            rate = baseInstance.rate;
             trans_id = baseInstance.id;
         }
 

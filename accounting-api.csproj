@@ -16,7 +16,6 @@
   <ItemGroup>
     <Folder Include="Controllers\Report\" />
     <Folder Include="Controllers\Transaction\" />
-    <Folder Include="Data\NewFolder\" />
   </ItemGroup>
 
 </Project>

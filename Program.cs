@@ -15,6 +15,7 @@ options.UseSqlServer(connectionStringAt));
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<UnitOfWork>();
+builder.Services.AddMemoryCache();
 // Add services to the container.
 
 builder.Services.AddControllers();

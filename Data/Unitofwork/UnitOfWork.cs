@@ -37,12 +37,39 @@ namespace accounting_api.Data.Unitofwork
                 // Rollback changes if an exception occurred during commit
                 _dbTransaction?.Rollback();
             }
+<<<<<<< Updated upstream
             finally
             {
                 // Dispose of the transaction and database contexts
                 _dbTransaction?.Dispose();
                 _dbContext.Dispose();
                 _dbContextAt.Dispose();
+=======
+            
+        }
+
+        public void SaveChanges()
+        {
+            try {
+
+                _dbContextAt?.SaveChanges();
+                _dbTransactionAt?.Commit();
+
+                _dbContext?.SaveChanges();
+                _dbTransaction?.Commit();
+            }
+            catch(Exception ex) {
+                Console.WriteLine(ex.Message);
+                _dbTransaction.Rollback();
+                _dbTransactionAt.Rollback();
+                throw;
+            }
+            finally
+            {
+                // Dispose of the transaction and database contexts
+                _dbTransactionAt?.Dispose();
+                _dbTransaction?.Dispose();
+>>>>>>> Stashed changes
             }
         }
           

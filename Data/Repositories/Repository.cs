@@ -29,9 +29,10 @@ namespace accounting_api.Repositories
         {
             try
             {
-                CacheData.Data = null;
-                _dbContextAt.Set<T2>().Add(entity2);
+                CacheData.Data.Remove(typeof(T1).Name);
+
                 _dbContext.Set<T1>().Add(entity1);
+                _dbContextAt.Set<T2>().Add(entity2);
             }
             catch (Exception ex)
             {
@@ -42,12 +43,21 @@ namespace accounting_api.Repositories
 
         async Task<IEnumerable<T1>> IRepository<T1, T2>.GetAll()
         {
-             if(CacheData.Data == null)
+            IEnumerable<T1> data = null;
+             
+            checkAgain:
+            if (CacheData.Data.TryGetValue(typeof(T1).Name, out var values))
             {
-                CacheData.Data = await _dbContext.Set<T1>().ToListAsync(); 
+                data =  (IEnumerable<T1>)values;
+            }
+            else
+            {
+                //CacheData.Data = new Dictionary<string, System.Collections.IList>();
+                CacheData.Data.Add(typeof(T1).Name, await _dbContext.Set<T1>().ToListAsync());
+                goto checkAgain;
             }
 
-            return CacheData.Data;
+            return data;
         }
 
         public T1 GetById(int id)
@@ -57,14 +67,20 @@ namespace accounting_api.Repositories
 
         void IRepository<T1, T2>.Remove(T1 entity1,T2 entity2)
         {
-            CacheData.Data = null;
+            CacheData.Data.Remove(typeof(T1).Name);
+
             _dbContextAt.Set<T2>().Add(entity2);
             _dbContext.Set<T1>().Remove(entity1); 
         }
 
         void IRepository<T1, T2>.Update(T1 entity1, T2 entity2)
         {
+<<<<<<< Updated upstream
             CacheData.Data = null;
+=======
+            CacheData.Data.Remove(typeof(T1).Name); 
+
+>>>>>>> Stashed changes
             _dbContextAt.Set<T2>().Add(entity2);
             _dbContext.Set<T1>().Update(entity1);
         }

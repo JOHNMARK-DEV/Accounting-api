@@ -32,7 +32,7 @@ namespace accounting_api.Controllers.Setup.Others
                 //ADDITIONAL INFORMATION 
                 at_table.AT_ACTION = "INSERT";
                 at_table.AT_USER_ID = 1;
-                at_table.IP_ADDRESS = "INSERT";
+                at_table.IP_ADDRESS = HttpContext.Connection.RemoteIpAddress.ToString();
 
                 _unitOfWork.Setup_Expandedtax_model.Add(model, at_table);
 

@@ -1,13 +1,14 @@
 ﻿using accounting_api.Data.Unitofwork;
+using accounting_api.Models.Setup.Others;
 using accounting_api.Models.Setup.Tax;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace accounting_api.Controllers.Setup.Tax
+namespace accounting_api.Controllers.Setup.Others
 {
 
     [ApiController]
-    [Route("[controller]")] 
+    [Route("api/[controller]")]
     public class OutputvatSetupController : ControllerBase
     {
         private UnitOfWork _unitOfWork;
@@ -32,17 +33,16 @@ namespace accounting_api.Controllers.Setup.Tax
                 //ADDITIONAL INFORMATION 
                 at_table.AT_ACTION = "INSERT";
                 at_table.AT_USER_ID = 1;
-                at_table.IP_ADDRESS = "INSERT"; 
+                at_table.IP_ADDRESS = HttpContext.Connection.RemoteIpAddress.ToString();
 
                 _unitOfWork.Setup_Outputvat_model.Add(model, at_table);
 
                 _unitOfWork.SaveChanges();
-                _unitOfWork.Dispose();
 
                 return Ok();
             }
             catch (Exception ex)
-            { 
+            {
                 Console.WriteLine(ex.Message);
                 return BadRequest(ex.Message);
             }
@@ -82,7 +82,6 @@ namespace accounting_api.Controllers.Setup.Tax
                 _unitOfWork.Setup_Outputvat_model.Update(model, at_table);
 
                 _unitOfWork.SaveChanges();
-                _unitOfWork.Dispose();
 
                 return Ok();
             }
