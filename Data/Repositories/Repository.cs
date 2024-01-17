@@ -74,13 +74,10 @@ namespace accounting_api.Repositories
         }
 
         void IRepository<T1, T2>.Update(T1 entity1, T2 entity2)
-        {
-<<<<<<< Updated upstream
-            CacheData.Data = null;
-=======
+        { 
+            CacheData.Data = null; 
             CacheData.Data.Remove(typeof(T1).Name); 
-
->>>>>>> Stashed changes
+             
             _dbContextAt.Set<T2>().Add(entity2);
             _dbContext.Set<T1>().Update(entity1);
         }

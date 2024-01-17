@@ -12,6 +12,7 @@ namespace accounting_api.Data.Unitofwork
         private ApplicationDBContext? _dbContext;
         private ApplicationAtDBContext? _dbContextAt;
         private readonly IDbContextTransaction _dbTransaction;
+        private readonly IDbContextTransaction _dbTransactionAt;
         public UnitOfWork(ApplicationDBContext dbContext, ApplicationAtDBContext dbContextAt) : base(dbContext, dbContextAt)
         {
             try
@@ -19,6 +20,7 @@ namespace accounting_api.Data.Unitofwork
                 _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
                 _dbContextAt = dbContextAt ?? throw new ArgumentNullException(nameof(dbContextAt));
                 _dbTransaction = _dbContext.Database.BeginTransaction();
+                _dbTransactionAt = _dbContextAt.Database.BeginTransaction();
             }
             catch (Exception ex)
             {
@@ -37,14 +39,13 @@ namespace accounting_api.Data.Unitofwork
                 // Rollback changes if an exception occurred during commit
                 _dbTransaction?.Rollback();
             }
-<<<<<<< Updated upstream
             finally
             {
                 // Dispose of the transaction and database contexts
                 _dbTransaction?.Dispose();
                 _dbContext.Dispose();
                 _dbContextAt.Dispose();
-=======
+            }
             
         }
 
@@ -68,24 +69,9 @@ namespace accounting_api.Data.Unitofwork
             {
                 // Dispose of the transaction and database contexts
                 _dbTransactionAt?.Dispose();
-                _dbTransaction?.Dispose();
->>>>>>> Stashed changes
+                _dbTransaction?.Dispose(); 
             }
         }
-          
-        public void SaveChanges()
-        {
-            try { 
-                _dbContext.SaveChanges();
-                _dbContextAt.SaveChanges();
-
-                _dbTransaction?.Commit();
-
-            } catch {
-                _dbTransaction.Rollback();
-                throw;
-            }
-            
-        } 
+         
     }
 }

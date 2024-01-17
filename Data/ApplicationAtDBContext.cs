@@ -1,12 +1,10 @@
-<<<<<<< Updated upstream
-﻿using accounting_api.Models.Setup.Tax;
-=======
+ 
+﻿using accounting_api.Models.Setup.Tax; 
 ﻿using accounting_api.Models.Setup;
 using accounting_api.Models.Setup.Book;
 using accounting_api.Models.Setup.Chart;
 using accounting_api.Models.Setup.Others;
-using accounting_api.Models.Setup.Tax;
->>>>>>> Stashed changes
+using accounting_api.Models.Setup.Tax; 
 using accounting_api.Models.Setup.User;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
@@ -24,10 +22,7 @@ namespace accounting_api.Data
         public DbSet<Setup_Outputvat_model_at> setup_output_vat_at { get; set; } 
         public DbSet<Setup_Expandedtax_model_at> setup_expanded_tax_at { get; set; }
         public DbSet<Setup_Finaltax_model_at> setup_final_tax_at { get; set; }
-<<<<<<< Updated upstream
-=======
-
-
+  
         //OTHERS  
         public DbSet<Setup_Bank_model_at> Setup_Bank_at { get; set; } 
         public DbSet<Setup_Currency_model_at> Setup_Currency_at { get; set; }
@@ -54,7 +49,6 @@ namespace accounting_api.Data
 
         // Business Partner
         public DbSet<Setup_Businesspartner_model_at> setup_business_partner { get; set; }
-
->>>>>>> Stashed changes
+         
     }
 }
