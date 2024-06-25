@@ -8,10 +8,10 @@ var connectionString = builder.Configuration.GetConnectionString("db_main");
 var connectionStringAt = builder.Configuration.GetConnectionString("db_at");
 
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
-options.UseSqlServer(connectionString));
+options.UseMySQL(connectionString));
 
 builder.Services.AddDbContext<ApplicationAtDBContext>(options =>
-options.UseSqlServer(connectionStringAt));
+options.UseMySQL(connectionStringAt));
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<UnitOfWork>();
